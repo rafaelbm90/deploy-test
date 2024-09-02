@@ -6,6 +6,14 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
+import { LinksFunction } from "@remix-run/node";
+
+import NavBar from "./components/NavBar";
+
+import styles from "./styles/main.css";
+
+export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
+
 export default function App() {
   return (
     <html lang="en">
@@ -16,6 +24,7 @@ export default function App() {
         <Links />
       </head>
       <body>
+        <NavBar />
         <Outlet />
         <ScrollRestoration />
         <Scripts />

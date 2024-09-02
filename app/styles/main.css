@@ -1,0 +1,86 @@
+* {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.nav-bar {
+  max-width: 100%;
+  background-color: rgb(166, 224, 255);
+  margin: 10px;
+  padding: 5px;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 1fr 0.5fr 1fr;
+}
+
+.nav-bar-option {
+  color: black;
+  text-decoration: none;
+}
+
+.nav-bar-home {
+  text-align: end;
+}
+.nav-bar-latest {
+  text-align: center;
+}
+.nav-bar-about {
+  text-align: start;
+}
+
+.home-hero-parent {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+/* Large screens (desktops and laptops) */
+@media (min-width: 1024px) {
+  .home-hero {
+    width: 60%;
+    height: 300px;
+  }
+}
+
+/* Medium screens (tablets) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .home-hero {
+    width: 70%;
+    height: 300px;
+  }
+}
+
+/* Small screens (smartphones) */
+@media (max-width: 767px) {
+  .home-hero {
+    width: 90%;
+    height: 300px;
+  }
+}
+
+.home-hero {
+  border: 1px solid black;
+}
+
+.home-hero-grid1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.home-hero-grid2 {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+.home-hero-left {
+  background-color: rgb(255, 91, 91);
+}
+
+.home-hero-top-right {
+  background-color: rgb(93, 41, 235);
+}
+
+.home-hero-bottom-right {
+  background-color: rgb(23, 189, 73);
+}
