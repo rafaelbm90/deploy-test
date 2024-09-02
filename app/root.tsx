@@ -10,11 +10,9 @@ import { LinksFunction } from "@remix-run/node";
 
 import NavBar from "./components/NavBar";
 
-// import styles from "./styles/main.css";
+import styles from "./styles/main.css";
 
-export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: "/styles/main.css" },
-];
+export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
 export default function App() {
   return (
