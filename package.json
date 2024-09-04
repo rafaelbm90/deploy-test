@@ -10,6 +10,9 @@
     "start": "netlify serve",
     "typecheck": "tsc"
   },
+  "prisma": {
+    "seed": "prisma/seed.ts"
+  },
   "dependencies": {
     "@netlify/functions": "^2.6.0",
     "@netlify/remix-adapter": "^2.3.1",
@@ -17,10 +20,13 @@
     "@remix-run/node": "^2.11.2",
     "@remix-run/react": "^2.11.2",
     "@remix-run/serve": "^2.11.2",
-    "isbot": "^4.1.0"
+    "bcryptjs": "^2.4.3",
+    "isbot": "^4.1.0",
+    "tiny-invariant": "^1.3.3"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.11.2",
+    "@types/bcryptjs": "^2.4.6",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.7.4",
