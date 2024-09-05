@@ -7,10 +7,6 @@ import { Link, useLoaderData } from "@remix-run/react";
 
 // type LoaderData = { posts?: Post };
 
-type LoaderData = {
-  posts: Awaited<ReturnType<typeof getPosts>>;
-};
-
 export const loader: LoaderFunction = async ({ request, params }) => {
   // invariant(params.id, "id is required");
   const posts = await getPosts();
@@ -19,11 +15,11 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     throw new Response("Not Found", { status: 404 });
   }
 
-  return json<LoaderData>({ posts });
+  return json({ posts });
 };
 
 function Latest() {
-  const { posts } = useLoaderData() as LoaderData;
+  const { posts } = useLoaderData<typeof loader>();
 
   return (
     <>

@@ -4,6 +4,49 @@
   padding: 0;
 }
 
+.flex {
+  display: flex;
+}
+.flex-start {
+  justify-content: start;
+  align-content: start;
+}
+.flex-center {
+  justify-content: center;
+  align-content: center;
+}
+.flex-end {
+  justify-content: end;
+  align-content: end;
+}
+
+.w100 {
+  width: 100px;
+}
+.w300 {
+  width: 300px;
+}
+
+.padding {
+  padding: 5px;
+}
+.margin {
+  margin: 5px;
+}
+
+.bold {
+  font-weight: bold;
+}
+.text-black {
+  color: black;
+}
+.text-white {
+  color: white;
+}
+.text-red {
+  color: red;
+}
+
 .nav-bar {
   max-width: 100%;
   background-color: rgb(0, 0, 0, 0);
@@ -12,7 +55,13 @@
   border: 2px solid black;
   border-radius: 10px;
   display: grid;
-  grid-template-columns: 1fr 0.5fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.nav-bar-center {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-content: space-between;
 }
 
 .nav-bar-option {
@@ -21,13 +70,16 @@
 }
 
 .nav-bar-home {
-  text-align: end;
+  text-align: center;
 }
 .nav-bar-latest {
   text-align: center;
 }
 .nav-bar-about {
-  text-align: start;
+  text-align: center;
+}
+.nav-bar-new {
+  text-align: center;
 }
 
 .home-hero-parent {
@@ -88,4 +140,17 @@
 .home-hero-bottom-right {
   background-color: rgb(23, 150, 73);
   margin: 5px;
+}
+
+.new-post-form-box {
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.submit-btn {
+  background-color: green;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
 }
