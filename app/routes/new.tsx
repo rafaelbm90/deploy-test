@@ -75,10 +75,11 @@ function NewPostRoute() {
         <div className="w100 flex-start">
           <label htmlFor="markdown">Body: </label>
         </div>
-        <div className="new-post-form-box w300">
+        <div className="new-post-form-box">
           <textarea
             id="body"
-            rows={10}
+            rows={5}
+            cols={40}
             name="body"
             defaultValue={data.post?.body}
           />
