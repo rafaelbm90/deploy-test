@@ -44,14 +44,13 @@ function NewPostRoute() {
   const data = useLoaderData<typeof loader>();
 
   const navigation = useNavigation();
-  // const isCreating = navigation.submission?.formData.get("intent") === "create";
-  // const isUpdating = navigation.submission?.formData.get("intent") === "update";
-  // const isDeleting = navigation.submission?.formData.get("intent") === "delete";
+  const isCreating = navigation.formData?.get("intent") === "create";
+  const isUpdating = navigation.formData?.get("intent") === "update";
+  const isDeleting = navigation.formData?.get("intent") === "delete";
 
-  const isCreating = navigation.state === "submitting";
-  const isDeleting = navigation.state === "submitting";
-  const isUpdating = navigation.state === "loading";
   const isNewPost = !data.post;
+
+  const inputClassName = `w-full rounded border border-gray-500 px-2 py-1 text-lg`;
 
   return (
     <Form method="post" key={data.post?.id ?? "new"}>
@@ -73,13 +72,12 @@ function NewPostRoute() {
       </div>
       <div className="flex flex-center padding ">
         <div className="w100 flex-start">
-          <label htmlFor="markdown">Body: </label>
+          <label>Body: </label>
         </div>
-        <div className="new-post-form-box">
+        <div className={`${inputClassName} font-mono`}>
           <textarea
+            className="new-post-form-box"
             id="body"
-            rows={5}
-            cols={40}
             name="body"
             defaultValue={data.post?.body}
           />
