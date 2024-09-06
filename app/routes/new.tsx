@@ -7,6 +7,7 @@ import {
 import { Form, useLoaderData, useNavigation } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { createPost, getPosts, updatePost } from "~/models/post.server";
+import { Post } from "~/models/post.server";
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   const posts = await getPosts();
@@ -40,6 +41,30 @@ export const action: ActionFunction = async ({ request, params }) => {
   return redirect("/latest");
 };
 
+interface PostData {
+  post?: {
+    id?: string;
+    title?: string;
+    body?: string;
+  };
+}
+
+function Title({ data }: { data: PostData }) {
+  return (
+    <Form method="post" key={data.post?.id ?? "new"}>
+      <div className="flex flex-center padding">
+        <label className="w-100">Post Title: </label>
+        <input
+          className="w-300 border rounded"
+          type="text"
+          name="title"
+          defaultValue={data.post?.title}
+        />
+      </div>
+    </Form>
+  );
+}
+
 function NewPostRoute() {
   const data = useLoaderData<typeof loader>();
 
@@ -50,43 +75,32 @@ function NewPostRoute() {
 
   const isNewPost = !data.post;
 
-  const inputClassName = `w-full rounded border border-gray-500 px-2 py-1 text-lg`;
-
   return (
     <Form method="post" key={data.post?.id ?? "new"}>
+      <Title data={data} />
+
       <div className="flex flex-center padding">
-        <div className="w100 flex-start">
-          <label>Post Title: </label>
-        </div>
-        <div className="new-post-form-box w300">
-          <input type="text" name="title" defaultValue={data.post?.title} />
-        </div>
-      </div>
-      <div className="flex flex-center padding">
-        <div className="w100 flex-start">
-          <label>Post ID: </label>
-        </div>
-        <div className="new-post-form-box w300">
-          <input type="text" name="id" defaultValue={data.post?.id} />
-        </div>
+        <label className="w-100">Post ID: </label>
+        <input
+          className="w-300 border rounded"
+          type="text"
+          name="id"
+          defaultValue={data.post?.id}
+        />
       </div>
       <div className="flex flex-center padding ">
-        <div className="w100 flex-start">
-          <label>Body: </label>
-        </div>
-        <div className={`${inputClassName} font-mono`}>
-          <textarea
-            className="new-post-form-box"
-            id="body"
-            name="body"
-            defaultValue={data.post?.body}
-          />
-        </div>
+        <label className="w-100">Body: </label>
+        <textarea
+          className="w-300 h-300 border rounded no-resize"
+          // id="body"
+          name="body"
+          defaultValue={data.post?.body}
+        />
       </div>
-      <div className="flex flex-center">
+      <div className="flex flex-center margin-t">
         {isNewPost ? null : (
           <button
-            className="submit-btn"
+            className="submit-btn text-white bkgd-red"
             type="submit"
             name="intent"
             value="delete"
@@ -96,7 +110,7 @@ function NewPostRoute() {
           </button>
         )}
         <button
-          className="submit-btn text-white bold"
+          className="submit-btn text-white bold bkgd-green rounded padding"
           type="submit"
           name="intent"
           value={isNewPost ? "create" : "update"}
