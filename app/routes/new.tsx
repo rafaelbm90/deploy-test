@@ -7,7 +7,6 @@ import {
 import { Form, useLoaderData, useNavigation } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { createPost, getPosts, updatePost } from "~/models/post.server";
-import { Post } from "~/models/post.server";
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   const posts = await getPosts();
@@ -31,6 +30,10 @@ export const action: ActionFunction = async ({ request, params }) => {
   invariant(typeof id === "string", "id must be a string");
   invariant(typeof body === "string", "body must be a string");
 
+  if (!title) {
+    return null;
+  }
+
   // if (params.id === "new") {
   // await createPost({ title, id, body });
   await createPost({ title, id, body });
@@ -40,30 +43,6 @@ export const action: ActionFunction = async ({ request, params }) => {
 
   return redirect("/latest");
 };
-
-interface PostData {
-  post?: {
-    id?: string;
-    title?: string;
-    body?: string;
-  };
-}
-
-function Title({ data }: { data: PostData }) {
-  return (
-    <Form method="post" key={data.post?.id ?? "new"}>
-      <div className="flex flex-center padding">
-        <label className="w-100">Post Title: </label>
-        <input
-          className="w-300 border rounded"
-          type="text"
-          name="title"
-          defaultValue={data.post?.title}
-        />
-      </div>
-    </Form>
-  );
-}
 
 function NewPostRoute() {
   const data = useLoaderData<typeof loader>();
@@ -76,8 +55,16 @@ function NewPostRoute() {
   const isNewPost = !data.post;
 
   return (
-    <Form method="post" key={data.post?.id ?? "new"}>
-      <Title data={data} />
+    <Form method="POST" key={data.post?.id ?? "new"}>
+      <div className="flex flex-center padding">
+        <label className="w-100">Post Title: </label>
+        <input
+          className="w-300 border rounded"
+          type="text"
+          name="title"
+          defaultValue={data.post?.title}
+        />
+      </div>
 
       <div className="flex flex-center padding">
         <label className="w-100">Post ID: </label>
@@ -88,6 +75,7 @@ function NewPostRoute() {
           defaultValue={data.post?.id}
         />
       </div>
+
       <div className="flex flex-center padding ">
         <label className="w-100">Body: </label>
         <textarea
@@ -97,6 +85,7 @@ function NewPostRoute() {
           defaultValue={data.post?.body}
         />
       </div>
+
       <div className="flex flex-center margin-t">
         {isNewPost ? null : (
           <button
@@ -109,6 +98,7 @@ function NewPostRoute() {
             {isDeleting ? "Deleting..." : "Delete"}
           </button>
         )}
+
         <button
           className="submit-btn text-white bold bkgd-green rounded padding"
           type="submit"

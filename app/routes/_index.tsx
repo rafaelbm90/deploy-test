@@ -22,7 +22,7 @@ export const loader: LoaderFunction = async () => {
 export default function Index() {
   const posts = useLoaderData();
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
+    <div>
       <div className="home-hero-parent">
         <div className="home-hero home-hero-grid1">
           <div className="home-hero-left"></div>

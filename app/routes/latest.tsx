@@ -18,28 +18,38 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   return json({ posts });
 };
 
+export const action: ActionFunction = async ({ request, params }) => {};
+
 function Latest() {
   const { posts } = useLoaderData<typeof loader>();
 
   return (
     <>
-      <div>Latest</div>
-      <main>
-        <ul>
+      <main className="flex flex-center">
+        <ul className="w-500 margin-t3">
           {posts.map((post: Post) => (
-            <li key={post.id}>
-              <Link
-                to={post.id}
-                prefetch="intent"
-                className="text-blue-600 underline"
+            <Link
+              to={`/posts/${post.id}`}
+              className="text-black text-no-decoration"
+            >
+              <li
+                className="border rounded padding margin-t2 li-no-decoration hover-effect"
+                key={post.id}
               >
-                {`PostId ${post.id}`}
-                <br></br>
-                {`PostTitle ${post.title}`}
-                <br></br>
-                {`PostBody ${post.body}`}
-              </Link>
-            </li>
+                <h1 className="flex flex-center text-title padding">
+                  {post.title}
+                </h1>
+                <div className="grid grid-columns11">
+                  <div className="flex flex-center w-300 h-100">
+                    <img
+                      className="img-cover margin-r"
+                      src="/public/favicon.ico"
+                    ></img>
+                  </div>
+                  <h2 className="text-gray text-lg margin-l">{post.body}</h2>
+                </div>
+              </li>
+            </Link>
           ))}
         </ul>
       </main>
